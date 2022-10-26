@@ -82,7 +82,7 @@ stages:
     environment: dev
     variables:
     - group: Release
-    job:
+    - job:
       displayName: Deploy
       steps:
       - download: current
