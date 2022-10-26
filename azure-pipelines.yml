@@ -82,15 +82,12 @@ stages:
     environment: dev
     variables:
     - group: Release
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - download: current
-            artifact: drop
-          - task: AzureWebApp@1
-            displayName: 'Azure App Service Deploy: website'
-            inputs:
-              azureSubscription: 'xuefeng_rg'
-              appName: '$(WebAppNameDev)'
-              package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
+    steps:
+    - download: current
+      artifact: drop
+    - task: AzureWebApp@1
+      displayName: 'Azure App Service Deploy: website'
+      inputs:
+        azureSubscription: 'xuefeng_rg'
+        appName: '$(WebAppNameDev)'
+        package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
